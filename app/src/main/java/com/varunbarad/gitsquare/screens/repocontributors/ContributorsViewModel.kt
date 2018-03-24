@@ -8,6 +8,10 @@ import com.varunbarad.gitsquare.model.Contributor
  * Date: 25-03-2018
  * Project: GitSquare
  */
+const val SORT_ORDER_ASC = false
+const val SORT_ORDER_DESC = true
+
 class ContributorsViewModel : ViewModel() {
-  lateinit var contributors: ArrayList<Contributor>
+  lateinit var contributors: List<Contributor>
+  var sortOrderDesc = SORT_ORDER_ASC
 }

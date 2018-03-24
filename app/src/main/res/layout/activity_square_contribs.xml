@@ -50,6 +50,7 @@
                         android:id="@+id/button_toggleSort"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="toggleSortOrder"
                         android:text="@string/label_toggleSort"/>
                 </android.support.v7.widget.LinearLayoutCompat>
             </android.support.v4.widget.SwipeRefreshLayout>

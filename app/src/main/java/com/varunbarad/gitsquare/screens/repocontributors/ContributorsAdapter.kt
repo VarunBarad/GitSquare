@@ -13,7 +13,7 @@ import com.varunbarad.gitsquare.model.Contributor
  * Date: 24-03-2018
  * Project: GitSquare
  */
-class ContributorsAdapter(val contributors: ArrayList<Contributor>) : RecyclerView.Adapter<ContributorsAdapter.ViewHolder>() {
+class ContributorsAdapter(private var contributors: List<Contributor>) : RecyclerView.Adapter<ContributorsAdapter.ViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContributorsAdapter.ViewHolder {
     val itemViewBinding: ListItemContributorBinding = DataBindingUtil.inflate(
         LayoutInflater.from(parent.context),
@@ -30,12 +30,12 @@ class ContributorsAdapter(val contributors: ArrayList<Contributor>) : RecyclerVi
 
   override fun getItemCount(): Int = contributors.size
 
-  class ViewHolder : RecyclerView.ViewHolder {
-    private val itemViewBinding: ListItemContributorBinding
+  fun swapContributors(contributors: List<Contributor>) {
+    this.contributors = contributors
+    this.notifyDataSetChanged()
+  }
 
-    constructor(itemViewBinding: ListItemContributorBinding) : super(itemViewBinding.root) {
-      this.itemViewBinding = itemViewBinding
-    }
+  class ViewHolder(private val itemViewBinding: ListItemContributorBinding) : RecyclerView.ViewHolder(itemViewBinding.root) {
 
     fun bind(contributor: Contributor) {
       itemViewBinding.contributor = contributor

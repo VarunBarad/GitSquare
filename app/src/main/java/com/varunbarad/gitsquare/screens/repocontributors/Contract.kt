@@ -11,12 +11,13 @@ interface SquareContribsPresenter {
   val view: SquareContribsView
 
   fun loadContributorsFromNetwork()
+  fun sortContributors(contributors: List<Contributor>, sortDesc: Boolean): List<Contributor>
 }
 
 interface SquareContribsView {
   var presenter: SquareContribsPresenter
 
-  fun showContributors(contributors: ArrayList<Contributor>)
+  fun showContributors(contributors: List<Contributor>)
   fun showError()
   fun showProgress()
 }

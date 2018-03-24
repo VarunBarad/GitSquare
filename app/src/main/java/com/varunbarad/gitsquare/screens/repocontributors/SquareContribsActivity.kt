@@ -45,17 +45,17 @@ class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
         .setOnRefreshListener { presenter.loadContributorsFromNetwork() }
   }
 
-  override fun showContributors(contributors: ArrayList<Contributor>) {
+  override fun showContributors(contributors: List<Contributor>) {
     contributorsViewModel.contributors = contributors
 
-    dataBinding
-        .recyclerViewContributors
-        .adapter =
-        try {
-          contributorsAdapter
-        } catch (e: UninitializedPropertyAccessException) {
-          ContributorsAdapter(contributorsViewModel.contributors)
-        }
+    try {
+      contributorsAdapter.swapContributors(contributorsViewModel.contributors)
+    } catch (e: UninitializedPropertyAccessException) {
+      contributorsAdapter = ContributorsAdapter(contributorsViewModel.contributors)
+      dataBinding
+          .recyclerViewContributors
+          .adapter = contributorsAdapter
+    }
 
     dataBinding
         .containerError
@@ -102,5 +102,13 @@ class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
     dataBinding
         .containerOutput
         .visibility = View.VISIBLE
+  }
+
+  fun toggleSortOrder(view: View) {
+    contributorsViewModel.sortOrderDesc = !contributorsViewModel.sortOrderDesc
+    this.showContributors(presenter.sortContributors(
+        contributorsViewModel.contributors,
+        contributorsViewModel.sortOrderDesc
+    ))
   }
 }

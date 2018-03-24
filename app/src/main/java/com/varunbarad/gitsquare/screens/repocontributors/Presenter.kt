@@ -42,4 +42,12 @@ class Presenter(override val view: SquareContribsView) : SquareContribsPresenter
             }
         )
   }
+
+  override fun sortContributors(contributors: List<Contributor>, sortDesc: Boolean): List<Contributor> {
+    if (sortDesc == SORT_ORDER_ASC) {
+      return contributors.sortedByDescending { it.contributions }
+    } else {
+      return contributors.sortedBy { it.contributions }
+    }
+  }
 }
