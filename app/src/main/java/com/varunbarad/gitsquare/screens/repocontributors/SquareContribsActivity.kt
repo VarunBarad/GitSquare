@@ -11,10 +11,10 @@ import com.varunbarad.gitsquare.databinding.ActivitySquareContribsBinding
 import com.varunbarad.gitsquare.model.Contributor
 
 class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
-  lateinit var dataBinding: ActivitySquareContribsBinding
   override lateinit var presenter: SquareContribsPresenter
-  lateinit var contributorsAdapter: ContributorsAdapter
-  lateinit var contributorsViewModel: ContributorsViewModel
+  private lateinit var dataBinding: ActivitySquareContribsBinding
+  private lateinit var contributorsAdapter: ContributorsAdapter
+  private lateinit var contributorsViewModel: ContributorsViewModel
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -26,6 +26,9 @@ class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
   private fun setupActivity() {
     this.setSupportActionBar(dataBinding.toolbar)
 
+    this.dataBinding
+        .recyclerViewContributors.layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.column_contributors), GridLayoutManager.VERTICAL, false)
+
     this.contributorsViewModel = ViewModelProviders.of(this).get(ContributorsViewModel::class.java)
 
     try {
@@ -33,37 +36,53 @@ class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
     } catch (e: UninitializedPropertyAccessException) {
       presenter.loadContributorsFromNetwork()
     }
+
+    this.dataBinding
+        .containerOutput
+        .setOnRefreshListener { presenter.loadContributorsFromNetwork() }
+    this.dataBinding
+        .containerError
+        .setOnRefreshListener { presenter.loadContributorsFromNetwork() }
   }
 
   override fun showContributors(contributors: ArrayList<Contributor>) {
     contributorsViewModel.contributors = contributors
 
     dataBinding
+        .recyclerViewContributors
+        .adapter =
+        try {
+          contributorsAdapter
+        } catch (e: UninitializedPropertyAccessException) {
+          ContributorsAdapter(contributorsViewModel.contributors)
+        }
+
+    dataBinding
+        .containerError
+        .isRefreshing = false
+    dataBinding
         .containerError
         .visibility = View.GONE
+
     dataBinding
-        .containerProgress
-        .visibility = View.GONE
+        .containerOutput
+        .isRefreshing = false
     dataBinding
         .containerOutput
         .visibility = View.VISIBLE
-
-    contributorsAdapter = ContributorsAdapter(contributors)
-    dataBinding
-        .recyclerViewContributors
-        .layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.column_contributors), GridLayoutManager.VERTICAL, false)
-    dataBinding
-        .recyclerViewContributors
-        .adapter = contributorsAdapter
   }
 
   override fun showError() {
     dataBinding
-        .containerProgress
+        .containerOutput
         .visibility = View.GONE
     dataBinding
         .containerOutput
-        .visibility = View.GONE
+        .isRefreshing = false
+
+    dataBinding
+        .containerError
+        .isRefreshing = false
     dataBinding
         .containerError
         .visibility = View.VISIBLE
@@ -71,13 +90,17 @@ class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
 
   override fun showProgress() {
     dataBinding
-        .containerOutput
-        .visibility = View.GONE
-    dataBinding
         .containerError
         .visibility = View.GONE
     dataBinding
-        .containerProgress
+        .containerError
+        .isRefreshing = false
+
+    dataBinding
+        .containerOutput
+        .isRefreshing = true
+    dataBinding
+        .containerOutput
         .visibility = View.VISIBLE
   }
 }

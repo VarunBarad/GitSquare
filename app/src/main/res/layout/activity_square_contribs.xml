@@ -28,74 +28,51 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <FrameLayout
+            <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/container_output"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:visibility="visible">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerView_contributors"
+                <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/list_item_contributor"/>
-            </FrameLayout>
+                    android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView_contributors"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        tools:listitem="@layout/list_item_contributor"/>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/button_toggleSort"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_toggleSort"/>
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+            <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/container_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/error_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:layout_constraintBottom_toTopOf="@+id/error_description"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    app:srcCompat="@drawable/ic_error"
-                    app:tint="@color/colorAccent"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/error_description"
+                <android.support.v4.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/desc_error"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/error_icon"/>
-            </android.support.constraint.ConstraintLayout>
+                    android:layout_height="match_parent">
 
-            <android.support.v7.widget.LinearLayoutCompat
-                android:id="@+id/container_progress"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible"
-                tools:visibility="gone">
-
-                <android.widget.Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-
-                <android.support.v4.widget.ContentLoadingProgressBar
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:indeterminate="true"/>
-
-                <android.widget.Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-            </android.support.v7.widget.LinearLayoutCompat>
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/error_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:minHeight="50dp"
+                        app:srcCompat="@drawable/ic_error"/>
+                </android.support.v4.widget.NestedScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
         </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

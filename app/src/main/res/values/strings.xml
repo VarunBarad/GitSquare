@@ -2,6 +2,7 @@
     <string name="app_name">Git Square</string>
 
     <string name="label_contributedRepos">Contributed Repos</string>
+    <string name="label_toggleSort">Toggle sort order</string>
 
     <string name="format_contributionsCount">Contributions: %1$d</string>
 
