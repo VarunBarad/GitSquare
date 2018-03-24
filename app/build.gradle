@@ -34,6 +34,7 @@ ext {
     picassoVersion = '2.5.2'
     gsonVersion = '2.8.2'
     picassoTransformationsVersion = '2.2.1'
+    architectureComponentsViewModelVersion = '1.1.1'
 
     jUnitVersion = '4.12'
     androidTestRunnerVersion = '1.0.1'
@@ -69,6 +70,9 @@ dependencies {
     // Retrofit to fetch and parse API responses
     implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+
+    // Architecture Components - ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:${architectureComponentsViewModelVersion}"
 
     // JUnit Test Runner
     testImplementation "junit:junit:${jUnitVersion}"
