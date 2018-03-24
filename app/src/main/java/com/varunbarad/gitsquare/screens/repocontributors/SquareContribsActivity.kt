@@ -41,7 +41,7 @@ class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
     contributorsAdapter = ContributorsAdapter(contributors)
     dataBinding
         .recyclerViewContributors
-        .layoutManager = GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false)
+        .layoutManager = GridLayoutManager(this, resources.getInteger(R.integer.column_contributors), GridLayoutManager.VERTICAL, false)
     dataBinding
         .recyclerViewContributors
         .adapter = contributorsAdapter
