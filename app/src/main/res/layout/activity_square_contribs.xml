@@ -31,7 +31,8 @@
             <FrameLayout
                 android:id="@+id/container_output"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView"
@@ -40,22 +41,44 @@
                     android:text="Hello World!"/>
             </FrameLayout>
 
-            <FrameLayout
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/container_error"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/error_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintBottom_toTopOf="@+id/error_description"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:srcCompat="@drawable/ic_error"
+                    app:tint="@color/colorAccent"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/error_description"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Error!"/>
-            </FrameLayout>
+                    android:gravity="center"
+                    android:text="@string/desc_error"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/error_icon"/>
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:id="@+id/container_progress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible"
+                tools:visibility="gone">
 
                 <android.widget.Space
                     android:layout_width="match_parent"

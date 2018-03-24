@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Git Square</string>
+
+    <string name="desc_error">Some error occured!\nTry again later</string>
 </resources>
