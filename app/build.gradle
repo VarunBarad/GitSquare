@@ -3,9 +3,19 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        releaseConfig {
+            // I could extract these passwords to gradle.properties file so that they don't get
+            // exposed via Version-Control, but I left them here so that you don't have to go
+            // through the extra setup-step
+            keyAlias 'GitSquareKey'
+            keyPassword 'password'
+            storeFile file('../release-documents/GitSquare-KeyStore.jks')
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 27
     dataBinding.enabled = true
-
     defaultConfig {
         applicationId "com.varunbarad.gitsquare"
         minSdkVersion 19
@@ -42,10 +52,10 @@ ext {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // Kotlin
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}"
 
     // Android Data-Binding Annotation Processor for Kotlin
     kapt "com.android.databinding:compiler:${androidPluginVersion}"
@@ -61,6 +71,7 @@ dependencies {
 
     // Used to load images from network
     implementation "com.squareup.picasso:picasso:${picassoVersion}"
+
     // Image transformations library for Picasso
     implementation "jp.wasabeef:picasso-transformations:${picassoTransformationsVersion}"
 
@@ -79,6 +90,7 @@ dependencies {
 
     // Android specific test runner
     androidTestImplementation "com.android.support.test:runner:${androidTestRunnerVersion}"
+
     // Core espresso library for UI tests
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espressoVersion}"
 }
