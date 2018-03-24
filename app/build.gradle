@@ -23,6 +23,10 @@ android {
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
 ext {
     supportLibraryVersion = '27.1.0'
     constraintLayoutVersion = '1.0.2'
