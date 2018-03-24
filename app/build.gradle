@@ -33,6 +33,7 @@ ext {
     retrofitVersion = '2.3.0'
     picassoVersion = '2.5.2'
     gsonVersion = '2.8.2'
+    picassoTransformationsVersion = '2.2.1'
 
     jUnitVersion = '4.12'
     androidTestRunnerVersion = '1.0.1'
@@ -59,6 +60,8 @@ dependencies {
 
     // Used to load images from network
     implementation "com.squareup.picasso:picasso:${picassoVersion}"
+    // Image transformations library for Picasso
+    implementation "jp.wasabeef:picasso-transformations:${picassoTransformationsVersion}"
 
     // Library used for JSON serialization/deserialization
     implementation "com.google.code.gson:gson:${gsonVersion}"

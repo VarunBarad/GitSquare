@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="contributor"
+            type="com.varunbarad.gitsquare.model.Contributor"/>
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_card">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_card">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/avatar"
+                android:layout_width="@dimen/icon_size_normal"
+                android:layout_height="@dimen/icon_size_normal"
+                app:imageUrl="@{contributor.avatarUrl}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_profile"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_primary"
+                android:text="@{contributor.login}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                app:layout_constraintLeft_toRightOf="@+id/avatar"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="JakeWharton"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/repositoriesLink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/label_contributedRepos"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                app:layout_constraintLeft_toLeftOf="@+id/login"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/login"
+                app:webUrl="@{contributor.repositoriesUrl}"/>
+
+            <View
+                android:id="@+id/separator_contributions"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/space_fillerContributor"
+                android:background="@color/colorAccent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/avatar"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/contributionsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_secondary"
+                android:text="@{@string/format_contributionsCount(contributor.contributions)}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator_contributions"
+                tools:text="Contributions: 897"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</layout>

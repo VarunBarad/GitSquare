@@ -3,16 +3,16 @@ package com.varunbarad.gitsquare.screens.repocontributors
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.varunbarad.gitsquare.R
 import com.varunbarad.gitsquare.databinding.ActivitySquareContribsBinding
 import com.varunbarad.gitsquare.model.Contributor
-import com.varunbarad.gitsquare.presenters.SquareContribsPresenter
-import com.varunbarad.gitsquare.views.SquareContribsView
 
 class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
   lateinit var dataBinding: ActivitySquareContribsBinding
   override lateinit var presenter: SquareContribsPresenter
+  lateinit var contributorsAdapter: ContributorsAdapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -38,10 +38,13 @@ class SquareContribsActivity : AppCompatActivity(), SquareContribsView {
         .containerOutput
         .visibility = View.VISIBLE
 
-    dataBinding.textView.text = contributors.fold(
-        "",
-        { acc, c -> acc + "\n" + c.login }
-    )
+    contributorsAdapter = ContributorsAdapter(contributors)
+    dataBinding
+        .recyclerViewContributors
+        .layoutManager = GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false)
+    dataBinding
+        .recyclerViewContributors
+        .adapter = contributorsAdapter
   }
 
   override fun showError() {

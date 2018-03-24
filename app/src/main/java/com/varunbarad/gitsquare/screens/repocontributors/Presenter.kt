@@ -2,9 +2,7 @@ package com.varunbarad.gitsquare.screens.repocontributors
 
 import android.util.Log
 import com.varunbarad.gitsquare.model.Contributor
-import com.varunbarad.gitsquare.presenters.SquareContribsPresenter
 import com.varunbarad.gitsquare.remote.GithubApi
-import com.varunbarad.gitsquare.views.SquareContribsView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

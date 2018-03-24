@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Git Square</string>
 
+    <string name="label_contributedRepos">Contributed Repos</string>
+
+    <string name="format_contributionsCount">Contributions: %1$d</string>
+
     <string name="desc_error">Some error occured!\nTry again later</string>
+
+    <string name="message_noBrowser">No compatible app detected to open the page.</string>
 </resources>

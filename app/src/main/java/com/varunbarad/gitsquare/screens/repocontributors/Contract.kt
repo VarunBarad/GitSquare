@@ -1,13 +1,18 @@
-package com.varunbarad.gitsquare.views
+package com.varunbarad.gitsquare.screens.repocontributors
 
 import com.varunbarad.gitsquare.model.Contributor
-import com.varunbarad.gitsquare.presenters.SquareContribsPresenter
 
 /**
  * Creator: Varun Barad
  * Date: 24-03-2018
  * Project: GitSquare
  */
+interface SquareContribsPresenter {
+  val view: SquareContribsView
+
+  fun loadContributorsFromNetwork()
+}
+
 interface SquareContribsView {
   var presenter: SquareContribsPresenter
 

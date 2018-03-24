@@ -3,4 +3,14 @@
     <dimen name="elevation_appBar">4dp</dimen>
     <dimen name="elevation_cardView">2dp</dimen>
     <dimen name="elevation_floatingActionButton">6dp</dimen>
+
+    <dimen name="icon_size_normal">50dp</dimen>
+
+    <dimen name="margin_card">4dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+
+    <dimen name="space_primary">8dp</dimen>
+    <dimen name="space_secondary">4dp</dimen>
+
+    <dimen name="space_fillerContributor">24dp</dimen>
 </resources>
